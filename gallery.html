@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Beautiful Memories - Adu & Malju</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #ffeaa7, #fab1a0, #fd79a8);
+      font-family: 'Courier New', monospace;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      padding: 20px;
+    }
+
+    .header {
+      margin-bottom: 20px;
+      color: #2d3436;
+    }
+
+    .header h1 {
+      font-size: 2em;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    }
+
+    .header p {
+      font-size: 1em;
+      opacity: 0.8;
+      margin-top: 8px;
+    }
+
+    .photo-container {
+      position: relative;
+      background: white;
+      padding: 12px 12px 24px 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      max-width: 90vw;
+      max-height: 75vh;
+      overflow: hidden;
+    }
+
+    .photo-container img {
+      width: 100%;
+      height: auto;
+      max-height: 60vh;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+
+    .caption {
+      font-size: 0.95em;
+      color: #2d3436;
+      margin-top: 12px;
+      font-weight: bold;
+    }
+
+    .clothespin {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30px;
+      height: 25px;
+      background: linear-gradient(45deg, #D2691E, #F4A460, #D2691E);
+      border-radius: 15px 15px 5px 5px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .clothespin::after {
+      content: '';
+      position: absolute;
+      top: 4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 15px;
+      background: #8B4513;
+      border-radius: 10px 10px 3px 3px;
+    }
+
+    .end-message {
+      font-size: 1.4em;
+      color: #2d3436;
+      background: rgba(255,255,255,0.9);
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      display: none;
+      max-width: 90vw;
+    }
+
+    .back-button {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      background: rgba(255, 255, 255, 0.95);
+      border: none;
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .back-button:hover {
+      background: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    @media (max-width: 480px) {
+      .header h1 {
+        font-size: 1.5em;
+      }
+
+      .caption {
+        font-size: 0.9em;
+      }
+
+      .photo-container {
+        padding: 10px 10px 20px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="back-button" onclick="window.history.back()">← Back to Love</button>
+
+  <div class="header">
+    <h1>Our Beautiful Journey</h1>
+    <p>Tap to relive each memory 💕</p>
+  </div>
+
+  <div id="slideshow">
+    <div class="photo-container" onclick="nextPhoto()">
+      <div class="clothespin"></div>
+      <img id="photo" src="beach.jpg" alt="Memory">
+      <div class="caption" id="caption">when we last met..</div>
+    </div>
+  </div>
+
+  <div class="end-message" id="endMessage">
+    That's all for now... I hope I have made it upto you 💖
+  </div>
+
+  <script>
+    const photos = [
+      { src: "beach.jpg", caption: "when we last met.." },
+      { src: "skateboard.jpg", caption: "when we started talking again.." },
+      { src: "sleepingvc.jpg", caption: "endless vcs.." },
+      { src: "gardenvc.jpg", caption: "cute moment we had.." },
+      { src: "tokai.jpg", caption: "when we met again.." },
+      { src: "goamirror.jpg", caption: "goa but better.." },
+      { src: "flourworks.jpg", caption: "that moment before you left.." },
+      { src: "sleepingvc2.jpg", caption: "back to vcs.. & puchku" },
+      { src: "adu&malju.jpg", caption: "the night we met again.." },
+      { src: "sleepingtogether.jpg", caption: "sleeping but better.." },
+      { src: "mamaterrace.jpg", caption: "the place we'll cherish for a bit.." },
+      { src: "goa.jpg", caption: "i hope we meet again soon ∞" }
+    ];
+
+    let index = 0;
+
+    function nextPhoto() {
+      index++;
+      if (index >= photos.length) {
+        document.getElementById("slideshow").style.display = "none";
+        document.getElementById("endMessage").style.display = "block";
+        return;
+      }
+
+      const photo = document.getElementById("photo");
+      const caption = document.getElementById("caption");
+
+      photo.src = photos[index].src;
+      caption.innerText = photos[index].caption;
+    }
+  </script>
+
+</body>
+</html>
